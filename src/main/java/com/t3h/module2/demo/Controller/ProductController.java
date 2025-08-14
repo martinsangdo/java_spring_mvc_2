@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.t3h.module2.demo.Model.Product;
+import com.t3h.module2.demo.Service.ExternalApiService;
 
 import jakarta.validation.Valid;
 
 @RestController
 public class ProductController {
+    @Autowired
+    ExternalApiService externalApiService;
 
     @Autowired
     private SpringTemplateEngine templateEngine; // Inject Thymeleaf's template engine
@@ -38,4 +42,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
+    @GetMapping("/api/recipes")
+    public ResponseEntity<JsonNode> getRecipes() {
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/recipes");
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
