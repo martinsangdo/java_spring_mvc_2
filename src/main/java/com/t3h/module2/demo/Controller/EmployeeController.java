@@ -76,21 +76,16 @@ public class EmployeeController {
 
     @PostMapping("/api/employee/create_2")
     public ResponseEntity<List> createNewDataByBody(@RequestBody Map<String, Object> param){
-        HashMap<String, Object> employee = new HashMap<>();
-        employee.put("name", param.get("name"));
-        employee.put("email", param.get("email"));
-        employee.put("department", param.get("department"));
-        employee.put("salary", param.get("salary"));
         List<HashMap<String, Object>> employees = getData();
-        employees.add(employee);
+        employees.add(employeeService.createNewEmployee(param));
         return new ResponseEntity<List>(employees, HttpStatus.OK);
     }
 
     @PutMapping("/api/employee/update")
-    public ResponseEntity<HashMap<String, Object>> changeEmployeeInfo(@RequestBody Object newData){
+    public ResponseEntity<HashMap<String, Object>> changeEmployeeInfo(@RequestBody Map<String, Object> newData){
         List<HashMap<String, Object>> employees = getData();
-        //todo
+        HashMap<String, Object> updatedObj = employeeService.updateEmployee(employees, newData);
         //
-        return new ResponseEntity<HashMap<String, Object>>(employees.get(0), HttpStatus.OK);
+        return new ResponseEntity<HashMap<String, Object>>(updatedObj, HttpStatus.OK);
     }
 }

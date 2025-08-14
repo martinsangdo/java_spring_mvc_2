@@ -3,6 +3,7 @@ package com.t3h.module2.demo.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -40,4 +41,28 @@ public class EmployeeService {
         return matched;
     }
     
+    public HashMap createNewEmployee(Map param){
+        HashMap<String, Object> employee = new HashMap<>();
+        employee.put("name", param.get("name"));
+        employee.put("email", param.get("email"));
+        employee.put("department", param.get("department"));
+        employee.put("salary", param.get("salary"));
+        return employee;
+    }
+
+    public HashMap updateEmployee(List<HashMap<String, Object>> employees, Map newParams){
+        HashMap<String, Object> newEmp = new HashMap<>();
+        for (HashMap<String, Object> emp : employees) {
+            Object nameObj = emp.get("name");
+            if (nameObj != null && nameObj.toString().toLowerCase().equalsIgnoreCase(newParams.get("name").toString())) {
+                //update info
+                newEmp.put("name", emp.get("name"));
+                newEmp.put("department", emp.get("department"));
+                newEmp.put("email", emp.get("email"));
+                newEmp.put("salary", newParams.get("salary"));
+                break;
+            }
+        }
+        return newEmp;
+    }
 }
