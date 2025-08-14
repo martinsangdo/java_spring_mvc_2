@@ -1,6 +1,7 @@
 package com.t3h.module2.demo.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,36 @@ public class ProductController {
             JsonNode categories = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/categories");
             List<Recipe> jList = mapper.convertValue(categories, ArrayList.class);
             context.setVariable("categories", jList);
+        } catch (Exception e){
+            
+        }
+        return templateEngine.process("fruitables/shop", context);
+    }
+
+    //9.3
+    @GetMapping(value = "/mini_shop_detail", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_shop_detail() {
+        Context context = new Context();
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/1");
+            ObjectMapper mapper = new ObjectMapper();
+            HashMap jsonData = mapper.convertValue(data, HashMap.class);
+            context.setVariable("detail", jsonData);
+        } catch (Exception e){
+            
+        }
+        return templateEngine.process("fruitables/shop-detail", context);
+    }
+
+    //9.3
+    @GetMapping(value = "/search_results", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_shop_detail_search(@RequestParam String keyword) {
+        Context context = new Context();
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/search?q=" + keyword);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Recipe> jsonList = mapper.convertValue(data.get("products"), ArrayList.class);
+            context.setVariable("products", jsonList);
         } catch (Exception e){
             
         }
