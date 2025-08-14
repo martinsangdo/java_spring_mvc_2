@@ -65,4 +65,15 @@ public class EmployeeService {
         }
         return newEmp;
     }
+
+    public List deleteEmployee(List<HashMap<String, Object>> employees, String name){
+        List<HashMap<String, Object>> newList = new ArrayList<>();
+        for (HashMap<String, Object> emp : employees) {
+            Object nameObj = emp.get("name");
+            if (nameObj == null || !nameObj.toString().toLowerCase().equalsIgnoreCase(name)) {
+                newList.add(emp);
+            }
+        }
+        return newList;
+    }
 }

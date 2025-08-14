@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -87,5 +88,12 @@ public class EmployeeController {
         HashMap<String, Object> updatedObj = employeeService.updateEmployee(employees, newData);
         //
         return new ResponseEntity<HashMap<String, Object>>(updatedObj, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/employee/delete")
+    public ResponseEntity<List> changeEmployeeInfo(@RequestParam String name){
+        List<HashMap<String, Object>> employees = getData();
+        //
+        return new ResponseEntity<List>(employeeService.deleteEmployee(employees, name), HttpStatus.OK);
     }
 }
