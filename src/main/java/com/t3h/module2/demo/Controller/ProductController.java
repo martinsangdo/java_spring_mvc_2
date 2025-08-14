@@ -60,7 +60,7 @@ public class ProductController {
     //display data to UI page
     //7.3
     @GetMapping(value = "/recipes_ui", produces = MediaType.TEXT_HTML_VALUE)
-    public String display3_3() {
+    public String display7_3() {
         Context context = new Context();
         try {
             JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/recipes");
@@ -71,5 +71,19 @@ public class ProductController {
             
         }
         return templateEngine.process("unit7_3", context);
+    }
+    //7.4
+    @GetMapping(value = "/recipes_ui_new", produces = MediaType.TEXT_HTML_VALUE)
+    public String display7_4() {
+        Context context = new Context();
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/recipes");
+            ObjectMapper mapper = new ObjectMapper();
+            List<Recipe> jsonList = mapper.convertValue(data.get("recipes"), ArrayList.class);
+            context.setVariable("recipes", jsonList);
+        } catch (Exception e){
+            
+        }
+        return templateEngine.process("unit7_4", context);
     }
 }
