@@ -163,7 +163,7 @@ public class ProductController {
         return templateEngine.process("fruitables/shop-detail", context);
     }
 
-    //9.3
+    //9.4
     @GetMapping(value = "/search_results", produces = MediaType.TEXT_HTML_VALUE)
     public String mini_shop_detail_search(@RequestParam String keyword) {
         Context context = new Context();
@@ -176,5 +176,37 @@ public class ProductController {
             
         }
         return templateEngine.process("fruitables/shop", context);
+    }
+
+    //9.5
+    @GetMapping(value = "/mini_add_product", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_add_product() {
+        Context context = new Context();
+        return templateEngine.process("unit9_5", context);
+    }
+
+    //9.6
+    @GetMapping(value = "/mini_edit_product", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_edit_product() {
+        Context context = new Context();
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/1");
+            ObjectMapper mapper = new ObjectMapper();
+            HashMap jsonData = mapper.convertValue(data, HashMap.class);
+            context.setVariable("detail", jsonData);
+        } catch (Exception e){
+            
+        }
+        return templateEngine.process("fruitables/shop-detail", context);
+    }
+
+    @PostMapping("/api/mini_add_product")
+    public ResponseEntity<String> createNewProductMini(@RequestBody HashMap params) throws Exception{
+        // Convert map to JSON
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonBody = mapper.writeValueAsString(params);
+        System.out.println(jsonBody);        
+        String response = externalApiService.sendPostRequest("https://dummyjson.com/products/add", jsonBody);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 }

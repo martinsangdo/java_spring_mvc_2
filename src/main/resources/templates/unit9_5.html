@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Add new product</title>
+    <style>
+        table {
+            border-collapse: collapse; /* Ensures only one border line */
+            border: 1px gray;    /* Single blue border */
+            width: 60%;               /* Optional: full width */
+            }
+
+            tr, td {
+            border: 1px solid gray;    /* Blue borders for cells */
+            padding: 8px;              /* Some spacing inside cells */
+            text-align: left;          /* Align text nicely */
+            }
+    </style>
+</head>
+<body>
+    <script th:inline="javascript">
+        function submitData() {
+            const data = {
+                title: document.getElementById('txtName').value,
+                description: document.getElementById('txtDescription').value,
+                price: document.getElementById('txtPrice').value
+            };
+            fetch('/api/mini_add_product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server we're sending JSON
+                },
+                body: JSON.stringify(data) // Convert JavaScript object to JSON string
+            })
+            .then(response => {
+                if (!response.ok) {
+                    document.getElementById('divResult').textContent = 'Something is wrong in server';
+                }
+                return response.text(); // Parse the response as plain text (since our controller returns String)
+            })
+            .then(message => {
+                document.getElementById('divResult').textContent = message;
+            })
+            .catch(error => {
+                document.getElementById('divResult').textContent = error;
+            });
+        };
+    </script>
+    <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="txtName"/></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><input type="text" id="txtDescription"/></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" id="txtPrice"/></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="submitData();" value="Submit"/></td>
+                <td><div id="divResult"></div></td>
+            </tr>
+    </table>
+</body>
+</html>
