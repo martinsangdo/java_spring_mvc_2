@@ -128,10 +128,22 @@ public class ProductController {
 
         return templateEngine.process("fruitables/index", context);
     }
+    //9.1 & 9.2
     @GetMapping(value = "/mini_shop", produces = MediaType.TEXT_HTML_VALUE)
     public String mini_shop() {
         Context context = new Context();
-
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products");
+            ObjectMapper mapper = new ObjectMapper();
+            List<Recipe> jsonList = mapper.convertValue(data.get("products"), ArrayList.class);
+            context.setVariable("products", jsonList);
+            //get categories
+            JsonNode categories = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/categories");
+            List<Recipe> jList = mapper.convertValue(categories, ArrayList.class);
+            context.setVariable("categories", jList);
+        } catch (Exception e){
+            
+        }
         return templateEngine.process("fruitables/shop", context);
     }
 }
