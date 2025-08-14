@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -48,6 +51,18 @@ public class Home {
 
     @GetMapping(value = "/unit_javascript", produces = MediaType.TEXT_HTML_VALUE)
     public String pageUnitJavascript() {
+        Context context = new Context();
+        return templateEngine.process("unit_javascript", context);
+    }
+
+    @GetMapping("/demo/hello")
+    public ResponseEntity<String> displayHelloMe(@RequestParam String name){
+        String aString = "Hello " + name;
+        return new ResponseEntity<>(aString, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/demo/page2", produces = MediaType.TEXT_HTML_VALUE)
+    public String display3_3() {
         Context context = new Context();
         return templateEngine.process("unit_javascript", context);
     }
