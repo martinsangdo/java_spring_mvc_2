@@ -121,4 +121,17 @@ public class ProductController {
 
         return templateEngine.process("frozenyogurtshop/blog", context);
     }
+    //mini project
+    @GetMapping(value = "/mini_home", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_home() {
+        Context context = new Context();
+
+        return templateEngine.process("fruitables/index", context);
+    }
+    @GetMapping(value = "/mini_shop", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_shop() {
+        Context context = new Context();
+
+        return templateEngine.process("fruitables/shop", context);
+    }
 }
