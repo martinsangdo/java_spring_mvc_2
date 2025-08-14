@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unit Javascript</title>
+        <style>
+            table {
+                border-collapse: collapse; /* Ensures only one border line */
+                border: 1px solid gray;    /* Single blue border */
+                width: 60%;               /* Optional: full width */
+                }
+
+                tr, td {
+                border: 1px solid gray;    /* Blue borders for cells */
+                padding: 8px;              /* Some spacing inside cells */
+                text-align: left;          /* Align text nicely */
+                }
+        </style>
+    </head>
+    <body>
+
+        <h1>2.9</h1>
+        <table width="50%" cellpadding="10">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="txtName"/></td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>
+                    <select id="selRole">
+                        <option value="Manager">Manager</option>
+                        <option value="Leader">Leader</option>
+                        <option value="Developer">Developer</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Base salary</td>
+                <td><input type="text" id="txtBaseSalary" placeholder="Input base salary"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" onclick="beginCalculation();" value="Calculate"/></td>
+            </tr>
+            
+        </table>
+
+        <script>
+                class Employee {
+                    constructor(name, role, baseSalary) {
+                        this.name = name;
+                        this.role = role;
+                        this.baseSalary = baseSalary;
+                    }
+
+                    calculateSalary(){
+                        switch (this.role){
+                            case "Manager":
+                                return this.baseSalary * 3;
+                            case "Leader":
+                                return this.baseSalary * 1.6;
+                            case "Developer":
+                                return this.baseSalary;
+                        }
+                           
+
+                    }
+                }
+                function beginCalculation(){
+                    var name = document.getElementById("txtName").value;
+                    var baseSalary = document.getElementById("txtBaseSalary").value;
+                    var role = document.getElementById("selRole").value;
+                    const emp1 = new Employee(name, role, baseSalary);
+                    alert(emp1.calculateSalary())
+                }
+                
+        </script>
+
+        <h1>2.10</h1>
+        <style>
+            table.products {
+                width: 80%;
+                border-collapse: collapse;    /* ensures single outer border */
+                border: 1px solid #000;       /* black single line */
+                table-layout: fixed;
+            }
+
+            /* Remove inner cell borders, keep spacing inside cells */
+            .products td {
+                border: none;
+                padding: var(--gap);
+                vertical-align: top;
+            }
+
+            /* Product card inside each cell */
+            .product {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                padding: var(--card-padding);
+                height: 100%;
+            }
+
+            .product img {
+                width: 100%;
+                height: var(--img-height);
+                object-fit: cover;
+                border-radius: 6px;
+                background: #eee;
+                display: block;
+            }
+
+            .title {
+                font-weight: 700;
+                font-size: 1rem;
+                margin: 0;
+                color: #111;
+            }
+
+            .desc {
+                margin: 0;
+                font-size: 0.9rem;
+                color: #444;
+                line-height: 1.3;
+            }
+        </style>
+        <div><input type="button" value="Get data" onclick="getData();"/>
+        <div class="wrap">
+            <table class="products" role="table" aria-label="Sample products">
+                <tr>
+                    <td>Image</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                </tr>
+                
+                
+            </table>
+        </div>
+        <script>
+            
+        </script>
+    </body>
+</html>

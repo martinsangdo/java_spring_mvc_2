@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unit 1-4</title>
+        <style>
+            table {
+                border-collapse: collapse; /* Ensures only one border line */
+                border: 1px solid gray;    /* Single blue border */
+                width: 60%;               /* Optional: full width */
+                }
+
+                tr, td {
+                border: 1px solid gray;    /* Blue borders for cells */
+                padding: 8px;              /* Some spacing inside cells */
+                text-align: left;          /* Align text nicely */
+                }
+        </style>
+    </head>
+    <body>
+        <table width="50%" cellpadding="10">
+            <tr style="background-color: rgb(195, 235, 235);">
+                <td><strong>Component</strong></td>
+                <td><strong>Display</strong></td>
+            </tr>
+            <tr>
+                <td>Input text</td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td>Textarea</td>
+                <td><textarea rows="5" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td>Button</td>
+                <td><input type="button" value="Click me"/></td>
+            </tr>
+            <tr>
+                <td>Radio</td>
+                <td>
+                    <input type="radio" name="rdo1" checked/> Option 1<br/>
+                    <input type="radio" name="rdo1"/> Option 2<br/>
+                    <input type="radio" name="rdo1"/> Option 3<br/>
+                </td>
+            </tr>
+            <tr>
+                <td>Multiple selection</td>
+                <td>
+                    <input type="checkbox" name="chk1"/> Option 1<br/>
+                    <input type="checkbox" name="chk1" checked/> Option 2<br/>
+                    <input type="checkbox" name="chk1"/> Option 3<br/>
+                </td>
+            </tr>
+            <tr>
+                <td>Dropdown</td>
+                <td>
+                    <select>
+                        <option>Volvo</option>
+                        <option>Honda</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>File select</td>
+                <td>
+                    <input type="file"/>
+                </td>
+            </tr>
+            
+        </table>
+    </body>
+</html>
