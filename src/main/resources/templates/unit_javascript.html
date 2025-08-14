@@ -40,6 +40,27 @@
         </table>
 
         <h1>2.6</h1>
+        <script>
+            function calculateHypotenuse(){
+                let line_1 = document.getElementById('txt_line_1').value;
+                let line_2 = document.getElementById('txt_line_2').value;
+                document.getElementById('div_result_2').textContent = Math.sqrt(line_1 * line_1 + line_2 * line_2);
+            }
+        </script>
+        <table width="50%" cellpadding="10">
+            <tr>
+                <td>Line 1</td>
+                <td><input type="text" id="txt_line_1"/></td>
+            </tr>
+            <tr>
+                <td>Line 2</td>
+                <td><input type="text" id="txt_line_2"/></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="calculateHypotenuse();" value="Calculate"/></td>
+                <td><div id="div_result_2"></div></td>
+            </tr>
+        </table>
 
         <h1>2.7</h1>
 
