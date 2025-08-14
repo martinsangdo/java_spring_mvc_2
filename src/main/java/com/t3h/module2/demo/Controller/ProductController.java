@@ -13,7 +13,7 @@ public class ProductController {
 
     @Autowired
     private SpringTemplateEngine templateEngine; // Inject Thymeleaf's template engine
-    
+
     @GetMapping("/api/items")
     public Product displayItems(
         @RequestParam String name,
