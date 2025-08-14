@@ -86,4 +86,11 @@ public class ProductController {
         }
         return templateEngine.process("unit7_4", context);
     }
+    //8.1
+    @GetMapping(value = "/my_home", produces = MediaType.TEXT_HTML_VALUE)
+    public String display_home_template_1() {
+        Context context = new Context();
+            
+        return templateEngine.process("frozenyogurtshop/product", context);
+    }
 }
