@@ -48,20 +48,21 @@ public class EmployeeController {
 
    @Autowired
     EmployeeService employeeService;
-
+   //5.2
     @GetMapping("/api/search_employees")
     public ResponseEntity<List<HashMap<String, Object>>> searchEmployees(@RequestParam String keyword){
         List<HashMap<String, Object>> employees = getData();
         List<HashMap<String, Object>> results = employeeService.searchEmployees(employees, keyword);
         return new ResponseEntity<List<HashMap<String, Object>>>(results, HttpStatus.OK);
     }
+    //5.3
     @GetMapping("/api/search_employees_2")
     public ResponseEntity<List<HashMap<String, Object>>> searchEmployees2(@RequestParam String department, @RequestParam Integer min_salary){
         List<HashMap<String, Object>> employees = getData();
         List<HashMap<String, Object>> results = employeeService.searchEmployees2(employees, department, min_salary);
         return new ResponseEntity<List<HashMap<String, Object>>>(results, HttpStatus.OK);
     }
-
+    //5.4
     @PostMapping("/api/employee/create")
     public ResponseEntity<List> createNewData(@RequestParam String name,
         @RequestParam String email, @RequestParam String department, @RequestParam Integer salary){
@@ -74,14 +75,14 @@ public class EmployeeController {
         employees.add(employee);
         return new ResponseEntity<List>(employees, HttpStatus.OK);
     }
-
+    //5.5
     @PostMapping("/api/employee/create_2")
     public ResponseEntity<List> createNewDataByBody(@RequestBody Map<String, Object> param){
         List<HashMap<String, Object>> employees = getData();
         employees.add(employeeService.createNewEmployee(param));
         return new ResponseEntity<List>(employees, HttpStatus.OK);
     }
-
+    //5.6
     @PutMapping("/api/employee/update")
     public ResponseEntity<HashMap<String, Object>> changeEmployeeInfo(@RequestBody Map<String, Object> newData){
         List<HashMap<String, Object>> employees = getData();
@@ -89,7 +90,7 @@ public class EmployeeController {
         //
         return new ResponseEntity<HashMap<String, Object>>(updatedObj, HttpStatus.OK);
     }
-
+    //5.7
     @DeleteMapping("/api/employee/delete")
     public ResponseEntity<List> changeEmployeeInfo(@RequestParam String name){
         List<HashMap<String, Object>> employees = getData();

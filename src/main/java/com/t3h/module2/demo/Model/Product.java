@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//6.2 & 6.3 & 6.4
 @Data                   // Generates getters, setters, toString, equals, hashCode
 @AllArgsConstructor     // Generates constructor with all fields
 @NoArgsConstructor      // Generates no-args constructor (needed for Jackson)

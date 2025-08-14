@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unit 7.3</title>
+        <style>
+            table {
+                border-collapse: collapse; /* Ensures only one border line */
+                border: 1px gray;    /* Single blue border */
+                width: 60%;               /* Optional: full width */
+                }
+
+                tr, td {
+                border: 1px solid gray;    /* Blue borders for cells */
+                padding: 8px;              /* Some spacing inside cells */
+                text-align: left;          /* Align text nicely */
+                }
+        </style>
+    </head>
+    <body>
+        <table width="50%" cellpadding="10">
+            <tr>
+                <td><strong>Id</strong></td>
+                <td><strong>Title</strong></td>
+                <td><strong>Image</strong></td>
+                <td><strong>Rating</strong></td>
+            </tr>
+            <tr th:each="recipe : ${recipes}">
+                <td th:text="${recipe.id}"></td>
+                <td th:text="${recipe.name}"></td>
+                <td><img width="100" th:src="${recipe.image}"/></td>
+                <td th:text="${recipe.rating}"></td>
+            </tr>
+        </table>
+    </body>
+</html>

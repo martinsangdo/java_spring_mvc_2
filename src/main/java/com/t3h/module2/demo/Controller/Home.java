@@ -60,19 +60,19 @@ public class Home {
         Context context = new Context();
         return templateEngine.process("unit_javascript", context);
     }
-
+    //3.2
     @GetMapping("/demo/hello")
     public ResponseEntity<String> displayHelloMe(@RequestParam String name){
         String aString = "Hello " + name;
         return new ResponseEntity<>(aString, HttpStatus.OK);
     }
-
+    //3.3
     @GetMapping(value = "/demo/page2", produces = MediaType.TEXT_HTML_VALUE)
     public String display3_3() {
         Context context = new Context();
         return templateEngine.process("unit_javascript", context);
     }
-
+    //7.1
     @PostMapping(value = "/api/images")
     public ResponseEntity<String> uploadImages(@RequestParam("files") List<MultipartFile> files) {
         // Validate
