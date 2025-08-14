@@ -86,11 +86,39 @@ public class ProductController {
         }
         return templateEngine.process("unit7_4", context);
     }
-    //8.1
+    //8.1 & 8.2
     @GetMapping(value = "/my_home", produces = MediaType.TEXT_HTML_VALUE)
     public String display_home_template_1() {
         Context context = new Context();
+        try {
+            JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/recipes");
+            ObjectMapper mapper = new ObjectMapper();
+            List<Recipe> jsonList = mapper.convertValue(data.get("recipes"), ArrayList.class);
+            context.setVariable("recipes", jsonList);
+        } catch (Exception e){
             
+        }
         return templateEngine.process("frozenyogurtshop/product", context);
+    }
+    //8.3
+    @GetMapping(value = "/contact", produces = MediaType.TEXT_HTML_VALUE)
+    public String display_contact() {
+        Context context = new Context();
+
+        return templateEngine.process("frozenyogurtshop/contact", context);
+    }
+    //8.4
+    @GetMapping(value = "/about_us", produces = MediaType.TEXT_HTML_VALUE)
+    public String display_about() {
+        Context context = new Context();
+
+        return templateEngine.process("frozenyogurtshop/about", context);
+    }
+    //8.4
+    @GetMapping(value = "/blog", produces = MediaType.TEXT_HTML_VALUE)
+    public String display_blog() {
+        Context context = new Context();
+
+        return templateEngine.process("frozenyogurtshop/blog", context);
     }
 }

@@ -8,6 +8,11 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="css/mobile.css">
 	<script src="js/mobile.js" type="text/javascript"></script>
+	<script>
+		function displayMessage(){
+			document.getElementById('message_info').textContent = "We have received your request";
+		}
+	</script>
 </head>
 <body>
 	<div id="page">
@@ -63,7 +68,8 @@
 						<input type="text" name="Email" value="Email" onblur="this.value=!this.value?'Email':this.value;" onfocus="this.select()" onclick="this.value='';">
 						<input type="text" name="Subject" value="Subject" onblur="this.value=!this.value?'Subject':this.value;" onfocus="this.select()" onclick="this.value='';">
 						<textarea name="meassage" cols="50" rows="7">Share your thoughts</textarea>
-						<input type="submit" value="Send" id="submit">
+						<input type="button" value="Send" id="submit" onclick="displayMessage();"/>
+						<div id="message_info" style="color: blue;"></div>
 					</form>
 				</div>
 				<div class="section">
