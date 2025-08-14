@@ -22,5 +22,22 @@ public class EmployeeService {
 
         return matched;
     }
+
+    public List<HashMap<String, Object>> searchEmployees2(List<HashMap<String, Object>> employees, String department, Integer minSalary){
+        List<HashMap<String, Object>> matched = new ArrayList<>();
+        department = department.toLowerCase();
+
+        for (HashMap<String, Object> emp : employees) {
+            Object departmentObject = emp.get("department");
+            Object salaryObject = emp.get("salary");
+
+            if (departmentObject != null && departmentObject.toString().toLowerCase().contains(department) && 
+                salaryObject != null && Integer.parseInt(salaryObject.toString()) >= minSalary) {
+                matched.add(emp);
+            }
+        }
+
+        return matched;
+    }
     
 }

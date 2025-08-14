@@ -52,6 +52,12 @@ public class EmployeeController {
         List<HashMap<String, Object>> results = employeeService.searchEmployees(employees, keyword);
         return new ResponseEntity<List<HashMap<String, Object>>>(results, HttpStatus.OK);
     }
+    @GetMapping("/api/search_employees_2")
+    public ResponseEntity<List<HashMap<String, Object>>> searchEmployees2(@RequestParam String department, @RequestParam Integer min_salary){
+        List<HashMap<String, Object>> employees = getData();
+        List<HashMap<String, Object>> results = employeeService.searchEmployees2(employees, department, min_salary);
+        return new ResponseEntity<List<HashMap<String, Object>>>(results, HttpStatus.OK);
+    }
 
     @PutMapping("/api/employee/update")
     public ResponseEntity<HashMap<String, Object>> changeEmployeeInfo(@RequestBody Object newData){
