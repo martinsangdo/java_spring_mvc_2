@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -186,8 +188,8 @@ public class ProductController {
     }
 
     //9.6
-    @GetMapping(value = "/mini_edit_product", produces = MediaType.TEXT_HTML_VALUE)
-    public String mini_edit_product() {
+    @GetMapping(value = "/mini_edit_product/{id}", produces = MediaType.TEXT_HTML_VALUE)
+    public String mini_edit_product(@PathVariable String id) {
         Context context = new Context();
         try {
             JsonNode data = externalApiService.fetchDataFromExternalApi("https://dummyjson.com/products/1");
@@ -197,7 +199,7 @@ public class ProductController {
         } catch (Exception e){
             
         }
-        return templateEngine.process("fruitables/shop-detail", context);
+        return templateEngine.process("unit9_6", context);
     }
 
     @PostMapping("/api/mini_add_product")
@@ -207,6 +209,15 @@ public class ProductController {
         String jsonBody = mapper.writeValueAsString(params);
         System.out.println(jsonBody);        
         String response = externalApiService.sendPostRequest("https://dummyjson.com/products/add", jsonBody);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+
+    @PutMapping("/api/mini_edit_product")
+    public ResponseEntity<String> editProductMini(@RequestBody HashMap params) throws Exception{
+        // Convert map to JSON
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonBody = mapper.writeValueAsString(params);
+        String response = externalApiService.sendPutRequest("https://dummyjson.com/products/products/1", jsonBody);
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 }
